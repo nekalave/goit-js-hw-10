@@ -54,7 +54,6 @@ let select = new SlimSelect({
           divCat.insertAdjacentHTML('beforeend', arr);
           loader.style.display = 'none';
           select.settings.disabled = false;
-          console.log(data);
         })
         .catch(function(error) {
           console.log(error);
