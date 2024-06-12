@@ -15,10 +15,10 @@ let storedCats = [];
     }
   };
 
-export const fetchImg = async (selectValue) => {
+export const fetchCatByBreed = async (breedId) => {
   try {
     let selectedCatData = [];
-    const response = await axios.get(`https://api.thecatapi.com/v1/images/${selectValue[0]}`);
+    const response = await axios.get(`https://api.thecatapi.com/v1/images/${breedId[0]}`);
     selectedCatData.push(response.data);
     return selectedCatData
   } catch (error) {

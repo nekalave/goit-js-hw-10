@@ -1,6 +1,6 @@
 import SlimSelect from 'slim-select';
 import 'slim-select/dist/slimselect.css';
-import { fetchBreeds, fetchImg } from './cat-api';
+import { fetchBreeds, fetchCatByBreed } from './cat-api';
 
 const divCat = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
@@ -14,10 +14,10 @@ let select = new SlimSelect({
   },
   events: {
     afterClose: () => {
-      let selectValue = select.getSelected();
+      let breedId = select.getSelected();
       loader.style.display = 'inline-block';
       select.settings.disabled = true;
-      renderCatInfo(selectValue)
+      renderCatInfo(breedId)
     },
     beforeClose: () => {
       while (divCat.firstChild) {
@@ -27,9 +27,9 @@ let select = new SlimSelect({
   },
 });
 
-const renderCatInfo = async (selectValue) => {
+const renderCatInfo = async (breedId) => {
   loader.style.display = 'block';
- const selectedCatData = await fetchImg(selectValue)
+ const selectedCatData = await fetchCatByBreed(breedId)
   const arr = selectedCatData.map(d => `
       <img alt='${d.breeds[0].name}' src='${d.url}' width='400'/>
       <div style='margin-left: 20px'>
